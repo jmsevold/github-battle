@@ -1,8 +1,9 @@
 import React from 'react';
 
 class PromptContainer extends React.Component {
-  constructor(props) {
+  constructor(props,context) {
     super(props)
+    context.router
     this.state = {
       username: '',
 
@@ -10,10 +11,33 @@ class PromptContainer extends React.Component {
   }
 
   onUpdateUser(e){
-    console.log(this.state.username);
+    //console.log(this.state.username);
     this.setState({
       username: e.target.value
     })
+  }
+
+  onSubmitUser(e){
+    e.preventDefault();
+    let username = this.state.username;
+    this.setState({
+      username: ""
+    });
+    this.routeAfterFormSubmit();
+  }
+
+  routeAfterFormSubmit(){
+    if(this.props.routeParams.playerOne){
+      this.context.router.push({
+        pathname: '/battle',
+        query: {
+          playerOne: this.props.routeParams.playerOne,
+          playerTwo: this.props.routeParams.username
+        }
+      })
+    } else {
+      this.context.router.push(`/playerTwo/${this.state.username}`);
+    }
   }
 
   render() {
@@ -23,7 +47,7 @@ class PromptContainer extends React.Component {
       <div className="col-sm-12">
 
 
-        <form>
+        <form onSubmit={this.onSubmitUser.bind(this)}>
           <div className="form-group">
             <input
               className='form-control'
@@ -49,4 +73,8 @@ class PromptContainer extends React.Component {
     );
   }
 }
+
+PromptContainer.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};
 module.exports = PromptContainer;
