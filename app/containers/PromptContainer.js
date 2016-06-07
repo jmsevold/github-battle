@@ -1,8 +1,19 @@
 import React from 'react';
 
 class PromptContainer extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+
+    };
+  }
+
+  onUpdateUser(e){
+    console.log(this.state.username);
+    this.setState({
+      username: e.target.value
+    })
   }
 
   render() {
@@ -16,6 +27,9 @@ class PromptContainer extends React.Component {
           <div className="form-group">
             <input
               className='form-control'
+              type="text"
+              onChange={this.onUpdateUser.bind(this)}
+              value={this.state.username}
              />
           </div>
 
