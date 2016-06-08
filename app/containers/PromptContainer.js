@@ -1,20 +1,16 @@
 import React from 'react';
 import Prompt from '../components/Prompt'
 
-
-
 class PromptContainer extends React.Component {
   constructor(props,context) {
     super(props)
     context.router
     this.state = {
-      username: '',
-
+      username: ''
     };
   }
 
   handleUpdateUser(e){
-    console.log(this.state.username);
     this.setState({
       username: e.target.value
     })
@@ -49,7 +45,7 @@ class PromptContainer extends React.Component {
         onSubmitUser={this.handleSubmitUser}
         onUpdateUser={this.handleUpdateUser}
         header={this.props.route.header}
-        username={this.state.username}/>
+        username={this.state.username} />
     )
   }
 }
