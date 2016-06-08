@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import {PropTypes} from 'react'
 
 
 const Prompt = (props) => {
@@ -30,6 +31,13 @@ const Prompt = (props) => {
       </div>
     </div>
   );
+}
+
+Prompt.propTypes = {
+  onSubmitUser: PropTypes.func.isRequired,
+  onUpdateUser: PropTypes.func.isRequired,
+  header: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
 }
 
 module.exports = Prompt
