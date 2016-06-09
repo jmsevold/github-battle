@@ -8,6 +8,9 @@ class PromptContainer extends React.Component {
     this.state = {
       username: ''
     };
+    this.handleSubmitUser = this.handleSubmitUser.bind(this)
+    this.handleUpdateUser = this.handleUpdateUser.bind(this)
+
   }
 
   handleUpdateUser(e){
@@ -26,12 +29,12 @@ class PromptContainer extends React.Component {
   }
 
   routeAfterFormSubmit(){
-    if(this.props.routeParams.playerOne){
+    if(this.props.routeParams.playerOne) {
       this.context.router.push({
         pathname: '/battle',
         query: {
           playerOne: this.props.routeParams.playerOne,
-          playerTwo: this.props.routeParams.username
+          playerTwo: this.state.username
         }
       })
     } else {
@@ -42,8 +45,8 @@ class PromptContainer extends React.Component {
   render() {
     return(
       <Prompt
-        onSubmitUser={this.handleSubmitUser.bind(this)}
-        onUpdateUser={this.handleUpdateUser.bind(this)}
+        onSubmitUser={this.handleSubmitUser}
+        onUpdateUser={this.handleUpdateUser}
         header={this.props.route.header}
         username={this.state.username} />
     )
